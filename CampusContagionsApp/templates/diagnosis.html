@@ -1,0 +1,58 @@
+{% from "_formhelpers.html" import render_field %}
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="static/maps.css">
+
+        <title>Campus Contagions</title>
+        {{campusmap.js}}
+        {{doctormap.js}}
+    <body>
+        <h1>Campus Contagions</h1>
+        <div>
+            <h3> Possible Diseases </h3>
+
+            {{diagResult.json}}
+            <table border="1">
+                <tr>
+                    <th> Potential Illness </th>
+                    <th> Accuracy of Guess </th>
+                </tr>
+                {% for value in diagResult %}
+                <tr>
+                    <td> {{value['Issue']['Name']}} </td>
+                    <td> {{value['Issue']['Accuracy']}} </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>        
+        <div style="float: left;">
+            <h3> Symptom Map </h3>
+            <div style="margin-bottom:10px">{{campusmap.html}}</div>
+            <div id="campusmaplegend">
+                <div style="height:13px;width:13px;background-color:#fd9827;float:left;display:table-cell;margin-right:5px"></div>
+                <div style="margin-left:10px;display:table-cell;">Local Symptoms</div>
+                <div style="height:13px;width:13px;background-color:red;float:left;display:table-cell;margin-right:10px"></div>
+                <div style="margin-left:10px;display:table-cell">Local Diagnoses</div>
+            </div>
+        </div>
+        <div style="float:right;">
+            <h3> Doctor Map </h3>
+            <div style="float:right;">
+                <div style="">{{doctormap.html}}</div>
+            </div>
+            <div>
+                <div>
+                    <div style="height:10px;width:10px;background-color:#6b95f9;float:left;display:table-cell;margin-right:13px"></div>
+                    <div style="margin-left:13px;">Nearby Clinics</div>
+                </div>
+            </div>
+        </div>
+            <div style="float:right;width: 100%; overflow: hidden;">
+                <div style="">{{doctormap.html}}</div>
+            </div>
+        </div>
+    </body>
+</html>
